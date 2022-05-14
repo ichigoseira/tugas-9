@@ -1,0 +1,207 @@
+
+Setting environment for using XAMPP for Windows.
+User@DESKTOP-P4DG8DS c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 16
+Server version: 10.4.14-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database myshop;
+Query OK, 1 row affected (0.028 sec)
+
+MariaDB [(none)]> create table users;
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> create table users (
+    -> id integer auto_increment primary key,
+    -> nama varchar (255)
+    -> ;
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> create table user (
+    -> id integer auto_increment primary key,
+    -> nama varchar (255),
+    -> email varchar (255),
+    -> password varchar (255)
+    -> );
+ERROR 1046 (3D000): No database selected
+MariaDB [(none)]> use myshop
+Database changed
+MariaDB [myshop]> create table users (
+    -> id integer auto_increment primary key,
+    -> nama varchar (255),
+    -> email varchar (255)
+    ->
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 4
+
+MariaDB [myshop]> create table users (
+    -> id integer auto_increment primary key,
+    -> nama varchar (255),
+    -> email varchar (255),
+    -> password varchar (255)
+    -> );
+Query OK, 0 rows affected (0.398 sec)
+
+MariaDB [myshop]> create table categories (
+    -> id integer auto_increment primary key,
+    -> nama varchar (255)
+    -> );
+Query OK, 0 rows affected (0.238 sec)
+
+MariaDB [myshop]> create table items (
+    -> id integer auto_increment primary key,
+    -> nama varchar (255)
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 3
+
+MariaDB [myshop]> create table items (
+    -> id integer auto_increment primary key,
+    -> nama varchar (255),
+    -> description varchar (255),
+    -> price integer default 0,
+    -> stock integer default 0,
+    -> foreign key (categories_id) references categories(id)
+    -> );
+ERROR 1072 (42000): Key column 'categories_id' doesn't exist in table
+MariaDB [myshop]> create table items (
+    -> id integer auto_increment primary key,
+    -> nama varchar (255),
+    -> description varchar (255),
+    -> price integer default 0,
+    -> stock integer default 0,
+    -> categories_id integer
+    -> foreign key (categories_id) references categories(id)
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'foreign key
+ (categories_id) references categories(id)
+)' at line 8
+MariaDB [myshop]> create table items (
+    -> id integer auto_increment primary key,
+    -> nama varchar (255),
+    -> desctiption varchar (255),
+    -> orice integer default 0,
+    -> stock integer default 0,
+    -> categories_id integer,
+    -> foreign key (categories_id) references categories(id)
+    -> );
+Query OK, 0 rows affected (0.304 sec)
+
+MariaDB [myshop]> insert into users (id,nama,email,password) values (default, "John Dea", "john@doe.com", "john123")
+    -> ;
+Query OK, 1 row affected (0.345 sec)
+
+MariaDB [myshop]> insert into users (id,nama,email,password) values (default, "jane doe", "jane@doe.com", "jenite123");
+Query OK, 1 row affected (0.107 sec)
+
+MariaDB [myshop]> insert into categories (id,nama) values (default, "gadget")
+    -> ;
+Query OK, 1 row affected (0.034 sec)
+
+MariaDB [myshop]> insert into categories (id,nama) values (default, "cloth");
+Query OK, 1 row affected (0.067 sec)
+
+MariaDB [myshop]> insert into categories (id,nama) values (default, "men");
+Query OK, 1 row affected (0.038 sec)
+
+MariaDB [myshop]> insert into categories (id,nama) values (default, "women");
+Query OK, 1 row affected (0.037 sec)
+
+MariaDB [myshop]> insert into categories (id,nama) values (default, "branded");
+Query OK, 1 row affected (0.076 sec)
+
+MariaDB [myshop]> insert into items (id,nama desctiption,
+
+Setting environment for using XAMPP for Windows.
+User@DESKTOP-P4DG8DS c:\xampp
+# use myshop
+'use' is not recognized as an internal or external command,
+operable program or batch file.
+
+User@DESKTOP-P4DG8DS c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 16
+Server version: 10.4.14-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use myshop
+Database changed
+MariaDB [myshop]> tables myshop
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server versi
+on for the right syntax to use near 'tables myshop' at line 1
+MariaDB [myshop]> show tables;
++------------------+
+| Tables_in_myshop |
++------------------+
+| categories       |
+| items            |
+| users            |
++------------------+
+3 rows in set (0.105 sec)
+
+MariaDB [myshop]> insert items values (default,'sumsang b50','hape keren dari merek sumsang',4000000,100,1)
+    -> ;
+Query OK, 1 row affected (0.324 sec)
+
+MariaDB [myshop]> insert items values (default,'uniklohh','baju  keren dari merek ternama',500000,50,2);
+Query OK, 1 row affected (0.077 sec)
+
+MariaDB [myshop]> insert items values (default,'IMHO watch','jam tangan anak yang jujur banget',2000000,10,1);
+Query OK, 1 row affected (0.165 sec)
+
+MariaDB [myshop]> select name,email from users;
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+MariaDB [myshop]> select nama,email from users;
++----------+--------------+
+| nama     | email        |
++----------+--------------+
+| John Dea | john@doe.com |
+| jane doe | jane@doe.com |
++----------+--------------+
+2 rows in set (0.000 sec)
+
+MariaDB [myshop]> select id, name,price from items where price >1000000;
+ERROR 1054 (42S22): Unknown column 'name' in 'field list'
+MariaDB [myshop]> select id, nama,price from items where price >1000000;
+ERROR 1054 (42S22): Unknown column 'price' in 'field list'
+MariaDB [myshop]> show items;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server versi
+on for the right syntax to use near 'items' at line 1
+MariaDB [myshop]> select nama,price from items where price >1000000;
+ERROR 1054 (42S22): Unknown column 'price' in 'field list'
+MariaDB [myshop]> desc items;
++---------------+--------------+------+-----+---------+----------------+
+| Field         | Type         | Null | Key | Default | Extra          |
++---------------+--------------+------+-----+---------+----------------+
+| id            | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nama          | varchar(255) | YES  |     | NULL    |                |
+| desctiption   | varchar(255) | YES  |     | NULL    |                |
+| orice         | int(11)      | YES  |     | 0       |                |
+| stock         | int(11)      | YES  |     | 0       |                |
+| categories_id | int(11)      | YES  | MUL | NULL    |                |
++---------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.079 sec)
+
+MariaDB [myshop]> select nama,orice from items where orice >1000000;
++-------------+---------+
+| nama        | orice   |
++-------------+---------+
+| sumsang b50 | 4000000 |
+| IMHO watch  | 2000000 |
++-------------+---------+
+2 rows in set (0.060 sec)
+
+
+MariaDB [myshop]> select * from items where nama  like 'uniklo';
+Empty set (0.046 sec)
+
+ update items set 2500000 where kode='sumsang b50';
